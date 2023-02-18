@@ -55,22 +55,22 @@ h2{
             <div class="row">
             <div class="column" style="background-color:#aaa;">
                 <h2>Box - 1</h2>
-                <button class="button" id="btn1">button - 1</button>
+                <button class="button" id="btn1">Button - 1</button>
             </div>
             <div class="column" style="background-color:#bbb;">
                 <h2>Box - 2</h2>
-                <button class="button" id="btn2">button - 2</button>
+                <button class="button" id="btn2">Button - 2</button>
             </div>
             </div>
 
             <div class="row">
             <div class="column" style="background-color:#ccc;">
                 <h2>Box - 3</h2>
-                <button class="button" id="btn3">button - 3</button>
+                <button class="button" id="btn3">Button - 3</button>
             </div>
             <div class="column" style="background-color:#ddd;">
                 <h2>Box - 4</h2>
-                <button class="button" id="btn4">button - 4</button>
+                <button class="button" id="btn4">Button - 4</button>
             </div>
             </div>
         </div>
@@ -82,6 +82,8 @@ h2{
         $(document).ready(function () {
             var buttons = $(".button");
             var randIndex = Math.floor(Math.random() * buttons.length);
+            //console.log(randIndex);
+            //console.log(buttons.eq(randIndex)[0]);
             buttons.eq(randIndex).show();
 
             var clickedButtons = 0;
@@ -89,11 +91,17 @@ h2{
             buttons.on("click", function() {
                 $(this).hide();
                 clickedButtons++;
+                $(this).parent().addClass("clicked");
                 if (clickedButtons === 4) {
                     window.location.href = "https://www.google.com";
                 } else {
-                    randIndex = Math.floor(Math.random() * buttons.length);
-                    buttons.eq(randIndex).show();
+
+                    /* randIndex = Math.floor(Math.random() * buttons.length);
+                    buttons.eq(randIndex).show(); */
+                    var columnNotClk = $(".column:not(.clicked)");
+                    var checkClickorNot = columnNotClk.find(".button");
+                    randIndex = Math.floor(Math.random() * checkClickorNot.length);
+                    checkClickorNot.eq(randIndex).show();
                 }
             });
         });
